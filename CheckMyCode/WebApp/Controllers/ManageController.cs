@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CheckMyCode.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -23,6 +24,7 @@ namespace WebApp.Controllers
         }
 
         private ApplicationUserManager _userManager;
+
         public ApplicationUserManager UserManager
         {
             get
@@ -40,13 +42,13 @@ namespace WebApp.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
+                                   message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                                   : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                                     : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
+                                       : message == ManageMessageId.Error ? "An error has occurred."
+                                         : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
+                                           : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                                             : "";
 
             var model = new IndexViewModel
             {
@@ -270,9 +272,9 @@ namespace WebApp.Controllers
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : "";
+                                   message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+                                   : message == ManageMessageId.Error ? "An error has occurred."
+                                     : "";
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user == null)
             {
@@ -311,10 +313,11 @@ namespace WebApp.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
-#region Helpers
+        #region Helpers
+        
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
-
+        
         private IAuthenticationManager AuthenticationManager
         {
             get
@@ -322,13 +325,13 @@ namespace WebApp.Controllers
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
-
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        
+        private async Task SignInAsync(User user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
         }
-
+        
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -336,7 +339,7 @@ namespace WebApp.Controllers
                 ModelState.AddModelError("", error);
             }
         }
-
+        
         private bool HasPassword()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
@@ -346,7 +349,7 @@ namespace WebApp.Controllers
             }
             return false;
         }
-
+        
         private bool HasPhoneNumber()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
@@ -356,7 +359,7 @@ namespace WebApp.Controllers
             }
             return false;
         }
-
+        
         public enum ManageMessageId
         {
             AddPhoneSuccess,
@@ -367,7 +370,7 @@ namespace WebApp.Controllers
             RemovePhoneSuccess,
             Error
         }
-
-#endregion
+    
+        #endregion
     }
 }
