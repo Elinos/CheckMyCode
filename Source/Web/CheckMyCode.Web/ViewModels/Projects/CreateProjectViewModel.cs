@@ -21,6 +21,7 @@ namespace CheckMyCode.Web.ViewModels.Projects
         public HttpPostedFileBase File { get; set; }
 
         [Required]
+        [Display(Name = "Project Language Type")]
         public LanguageType LanguageType { get; set; }
     }
 }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Ionic.Zip;
+using System.IO;
 
 namespace CheckMyCode.Web.Areas.Projects.Controllers
 {
@@ -33,26 +35,37 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
             {
                 return View(model);
             }
-
+            
             var projectToAdd = new Project();
 
             projectToAdd.Name = model.Name;
             projectToAdd.OwnerId = User.Identity.GetUserId();
             projectToAdd.IsPublic = model.IsPublic;
-            if (Request.Files.Count > 0)
-            {
-                byte[] uploadedFile = new byte[model.File.InputStream.Length];
-                model.File.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
-                var file = new File()
-                {
-                    Content = uploadedFile,
-                    LanguageType = model.LanguageType,
-                    Filename = model.File.FileName
-                };
-                
-                projectToAdd.Files.Add(file);
-            }
 
+            if (model.File.ContentType != "application/zip" && model.File.ContentType != "application/x-zip-compressed")
+            {
+                ModelState.AddModelError("File", "You must upload zip file!");
+                return View(model);
+            }
+            using (ZipFile zip = ZipFile.Read(model.File.InputStream))
+            {
+                foreach (ZipEntry f in zip)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        f.Extract(ms);
+                        byte[] content = ms.ToArray();
+                        var file = new CheckMyCode.Data.Models.File()
+                        {
+                            Content = content,
+                            LanguageType = model.LanguageType,
+                            Filename = f.FileName
+                        };
+                        projectToAdd.Files.Add(file);
+                    }
+                }
+            }
+            
             projects.Add(projectToAdd);
             projects.SaveChanges();
 
