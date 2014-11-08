@@ -13,6 +13,9 @@ namespace CheckMyCode.Data.Models
         Python,
         JavaScript,
         CSS,
-        HTML
+        HTML,
+        XML,
+        ASP,
+        Unknown
     }
 }

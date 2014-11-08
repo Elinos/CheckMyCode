@@ -1,4 +1,5 @@
-﻿using CheckMyCode.Data.Common.Repository;
+﻿using CheckMyCode.Common;
+using CheckMyCode.Data.Common.Repository;
 using CheckMyCode.Data.Models;
 using CheckMyCode.Web.ViewModels.Projects;
 using System;
@@ -12,13 +13,10 @@ using System.IO;
 
 namespace CheckMyCode.Web.Areas.Projects.Controllers
 {
-    public class ManagementController : Controller
+    public class ManagementController : ProjectsBaseController
     {
-        private IRepository<Project> projects;
-
-        public ManagementController(IRepository<Project> projects)
+        public ManagementController(IRepository<Project> projects) : base(projects)
         {
-            this.projects = projects;
         }
 
         [HttpGet]
@@ -55,19 +53,22 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
                     {
                         f.Extract(ms);
                         byte[] content = ms.ToArray();
-                        var file = new CheckMyCode.Data.Models.File()
+                        if (content.Length > 0)
                         {
-                            Content = content,
-                            LanguageType = model.LanguageType,
-                            Filename = f.FileName
-                        };
-                        projectToAdd.Files.Add(file);
+                            var file = new CheckMyCode.Data.Models.File()
+                            {
+                                Content = content,
+                                LanguageType = Helpers.GetLanguageType(f.FileName),
+                                Filename = f.FileName
+                            };
+                            projectToAdd.Files.Add(file);
+                        }
                     }
                 }
             }
             
-            projects.Add(projectToAdd);
-            projects.SaveChanges();
+            this.Projects.Add(projectToAdd);
+            this.Projects.SaveChanges();
 
             return RedirectToAction("Create");
         }

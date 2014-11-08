@@ -192,6 +192,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Projects\Controllers\ListController.cs" />
     <Compile Include="Areas\Projects\Controllers\ManagementController.cs" />
+    <Compile Include="Areas\Projects\Controllers\ProjectsBaseController.cs" />
     <Compile Include="Areas\Projects\ProjectsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -203,8 +204,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\Home\IndexProjectsViewModel.cs" />
+    <Compile Include="ViewModels\Home\ListProjectsViewModel.cs" />
     <Compile Include="ViewModels\Projects\CreateProjectViewModel.cs" />
+    <Compile Include="ViewModels\Projects\ProjectViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -289,6 +291,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CheckMyCode.Common\CheckMyCode.Common.csproj">
+      <Project>{7D5F3546-6DED-4A1D-9195-9A0287DC944F}</Project>
+      <Name>CheckMyCode.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data\CheckMyCode.Data.Common\CheckMyCodeData.Common.csproj">
       <Project>{a22bf89d-5df2-44e9-91a7-ef6b0e06267c}</Project>
       <Name>CheckMyCodeData.Common</Name>

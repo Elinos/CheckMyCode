@@ -1,7 +1,14 @@
-﻿
+﻿@model IEnumerable<CheckMyCode.Web.ViewModels.Home.ListProjectsViewModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List of  Projects";
+}
+@foreach (var project in Model)
+{
+    <div class="row">
+        @project.Name
+        @project.OwnerUserName
+        @project.Language
+    </div>
 }
 
-<h2>Index</h2>
 

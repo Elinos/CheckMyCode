@@ -22,7 +22,11 @@ namespace CheckMyCode.Web.Controllers
 
         public ActionResult Index()
         {
-            var projects = this.projects.All().Project().To<IndexProjectsViewModel>();
+            var projects = this.projects
+                               .All()
+                               .Where(p => p.IsPublic)
+                               .Project()
+                               .To<ListProjectsViewModel>();
 
             return View(projects);
         }

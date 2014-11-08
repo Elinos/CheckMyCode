@@ -8,7 +8,7 @@ using System.Web;
 
 namespace CheckMyCode.Web.ViewModels.Projects
 {
-    public class CreateProjectViewModel : IMapFrom<Project>
+    public class ProjectViewModel : IMapFrom<Project>
     {
         [Required]
         [MinLength(3)]
@@ -18,6 +18,6 @@ namespace CheckMyCode.Web.ViewModels.Projects
         public bool IsPublic { get; set; }
 
         [Required]
-        public HttpPostedFileBase File { get; set; }
+        public IEnumerable<File> Files { get; set; }
     }
 }
