@@ -192,8 +192,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Projects\Controllers\ListController.cs" />
     <Compile Include="Areas\Projects\Controllers\ManagementController.cs" />
+    <Compile Include="Areas\Projects\Controllers\MyProjectsController.cs" />
     <Compile Include="Areas\Projects\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Projects\Controllers\ProjectsBaseController.cs" />
+    <Compile Include="Areas\Projects\Models\MyProjectsViewModel.cs" />
     <Compile Include="Areas\Projects\ProjectsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -232,6 +234,8 @@
     <Content Include="Areas\Projects\Views\List\Index.cshtml" />
     <Content Include="Areas\Projects\Views\List\_ProjectListResult.cshtml" />
     <Content Include="Areas\Projects\Views\Project\Index.cshtml" />
+    <Content Include="Areas\Projects\Views\MyProjects\Index.cshtml" />
+    <Content Include="Areas\Projects\Views\MyProjects\_MyProjectsList.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

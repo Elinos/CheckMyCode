@@ -1,0 +1,21 @@
+﻿@model IEnumerable<CheckMyCode.Web.Areas.Projects.Models.MyProjectsViewModel>
+@{
+    ViewBag.Title = "My Projects";
+}
+<h1>My Projects</h1>
+<div class="row">
+    <div class="col-lg-2">
+        <h4>Name</h4>
+    </div>
+    <div class="col-lg-2">
+        <h4>Language</h4>
+    </div>
+    <div class="col-lg-2">
+        <h4>Public</h4>
+    </div>
+</div>
+
+<div id="list-results">
+    @Html.Partial("_MyProjectsList", Model)
+</div>
+
