@@ -24,5 +24,11 @@
         </div>
     </div>
 }
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "list-results" }))
+@Html.PagedListPager((IPagedList)Model,
+    page => Url.Action("Index", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "list-results"
+    }))
 

@@ -18,7 +18,7 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
         }
         
         // GET: Projects/List
-        public ActionResult Index(string searchString, LanguageType? language, int? page)
+        public ActionResult Index(int? page)
         {
             var pageNumber = page ?? 1;
             var projectsToList = this.Projects
