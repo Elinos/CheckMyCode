@@ -1,0 +1,26 @@
+﻿@model CheckMyCode.Web.Areas.Projects.Models.ProjectViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Model.Name</h2>
+
+<div class="row">
+    <div class="col-lg-2">
+        <h3>Filename</h3>
+    </div>
+    <div class="col-lg-2">
+        <h3>Language</h3>
+    </div>
+</div>
+
+@foreach (var file in Model.Files)
+{
+    <div class="row">
+        <div class="col-lg-2">@file.Filename</div>
+        <div class="col-lg-2">@file.LanguageType</div>
+    </div>
+}
+<br />
+<a href="javascript:history.back()" class="btn btn-sm btn-info">Back</a>
+

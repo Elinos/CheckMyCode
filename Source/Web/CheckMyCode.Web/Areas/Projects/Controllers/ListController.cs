@@ -1,7 +1,7 @@
 ﻿using AutoMapper.QueryableExtensions;
 using CheckMyCode.Data.Common.Repository;
 using CheckMyCode.Data.Models;
-using CheckMyCode.Web.ViewModels.Projects;
+using CheckMyCode.Web.Areas.Projects.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

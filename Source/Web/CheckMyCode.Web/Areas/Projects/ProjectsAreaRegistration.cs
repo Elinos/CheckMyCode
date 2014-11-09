@@ -15,6 +15,11 @@ namespace CheckMyCode.Web.Areas.Projects
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
+                "Project_info",
+                "Projects/{controller}/{id}",
+                new { action = "Index"}
+            );
+            context.MapRoute(
                 "Projects_default",
                 "Projects/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }

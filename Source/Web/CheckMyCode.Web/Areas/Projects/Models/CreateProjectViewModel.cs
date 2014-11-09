@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace CheckMyCode.Web.ViewModels.Projects
+namespace CheckMyCode.Web.Areas.Projects.Models
 {
     public class CreateProjectViewModel : IMapFrom<Project>
     {

@@ -192,6 +192,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Projects\Controllers\ListController.cs" />
     <Compile Include="Areas\Projects\Controllers\ManagementController.cs" />
+    <Compile Include="Areas\Projects\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Projects\Controllers\ProjectsBaseController.cs" />
     <Compile Include="Areas\Projects\ProjectsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -204,9 +205,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\Projects\ListProjectsViewModel.cs" />
-    <Compile Include="ViewModels\Projects\CreateProjectViewModel.cs" />
-    <Compile Include="ViewModels\Projects\ProjectViewModel.cs" />
+    <Compile Include="Areas\Projects\Models\ListProjectsViewModel.cs" />
+    <Compile Include="Areas\Projects\Models\CreateProjectViewModel.cs" />
+    <Compile Include="Areas\Projects\Models\ProjectViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -230,6 +231,7 @@
     <Content Include="Areas\Projects\Views\Management\Create.cshtml" />
     <Content Include="Areas\Projects\Views\List\Index.cshtml" />
     <Content Include="Areas\Projects\Views\List\_ProjectListResult.cshtml" />
+    <Content Include="Areas\Projects\Views\Project\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -290,8 +292,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Projects\Models\" />
-    <Folder Include="ViewModels\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

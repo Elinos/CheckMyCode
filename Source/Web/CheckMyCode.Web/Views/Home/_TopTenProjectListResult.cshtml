@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CheckMyCode.Web.ViewModels.Projects.ListProjectsViewModel>
+﻿@model IEnumerable<CheckMyCode.Web.Areas.Projects.Models.ListProjectsViewModel>
 @if (Model.Count() == 0)
 {
     <div class="row text-center">
@@ -10,7 +10,7 @@
     <div class="row">
         <div class="row">
             <h4 class="col-lg-5 col-lg-offset-1">
-                <a href="#">@project.Name</a>
+                @Html.ActionLink(@project.Name, "Index", "Project", new { Area = "Projects", id = project.Id }, new { })
             </h4>
             <h5 class="col-lg-2">
                 <i>@project.Language</i>

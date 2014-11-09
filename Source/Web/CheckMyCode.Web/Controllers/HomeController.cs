@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
-using CheckMyCode.Web.ViewModels.Projects;
+using CheckMyCode.Web.Areas.Projects.Models;
 
 namespace CheckMyCode.Web.Controllers
 {

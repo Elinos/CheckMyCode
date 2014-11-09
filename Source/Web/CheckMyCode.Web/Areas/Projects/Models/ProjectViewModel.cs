@@ -6,16 +6,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace CheckMyCode.Web.ViewModels.Projects
+namespace CheckMyCode.Web.Areas.Projects.Models
 {
     public class ProjectViewModel : IMapFrom<Project>
     {
+        public int Id { get; set; }
+
         [Required]
         [MinLength(3)]
         [MaxLength(100)]
         public string Name { get; set; }
-
-        public bool IsPublic { get; set; }
 
         [Required]
         public IEnumerable<File> Files { get; set; }

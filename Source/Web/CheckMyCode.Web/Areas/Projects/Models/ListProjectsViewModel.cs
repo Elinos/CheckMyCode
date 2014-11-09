@@ -6,10 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CheckMyCode.Web.ViewModels.Projects
+namespace CheckMyCode.Web.Areas.Projects.Models
 {
     public class ListProjectsViewModel : IMapFrom<Project>, IHaveCustomMappings
     {
+
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string OwnerUserName { get; set; }
