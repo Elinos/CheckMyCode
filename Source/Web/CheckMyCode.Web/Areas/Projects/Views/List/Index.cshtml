@@ -3,21 +3,31 @@
     ViewBag.Title = "List of Projects";
 }
 <div class="row">
-    <div class="col-lg-8">
-        @using (Ajax.BeginForm("Search", null,
-            new AjaxOptions
-            {
-                UpdateTargetId = "list-results",
-                InsertionMode = InsertionMode.Replace,
-                HttpMethod = "POST"
-            }, new { id = "searchForm", @class = "pull-right form-inline" }))
+    @using (Ajax.BeginForm("Search", null,
+        new AjaxOptions
         {
-                    @Html.AntiForgeryToken()
+            UpdateTargetId = "list-results",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "POST"
+        }, new { id = "searchForm", @class = "form-inline" }))
+    {
+            @Html.AntiForgeryToken()
 
-                    <input type="text" name="searchString" oninput="changed()" class="form-control" />
-                    <input type="submit" value="Search" class="btn btn-info"/>
-        }
-    </div>
+            <div class="col-lg-2">
+                @Html.EnumDropDownListFor(m => Model.First().Language, new
+                {
+                    @class = "form-control",
+                    id = "language-dropdown",
+                    name = "language",
+                    onchange = "changed()"
+                })
+            </div>
+            <div class="col-lg-8">
+                <input type="text" name="searchString" oninput="changed()" class="form-control" />
+                <input type="submit" value="Search" class="btn btn-info" />
+            </div>
+
+    }
 </div>
 <div class="row">
     <div class="col-lg-2">
@@ -37,4 +47,7 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/common")
+    <script>
+        $("#language-dropdown").val('0');
+    </script>
 }

@@ -29,7 +29,7 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Search(string searchString)
+        public ActionResult Search(string searchString, LanguageType language)
         {
             var result = this.Projects
                              .All()
@@ -42,6 +42,11 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
                 result = result
                                .Where(p => p.Name.ToLower().Contains(searchString.ToLower()) ||
                                            p.OwnerUserName.ToLower().Contains(searchString.ToLower()));
+            }
+
+            if (language != null && language.ToString() != "All")
+            {
+                result = result.Where(p => p.Language == language);
             }
             return PartialView("_ProjectListResult", result);
         }

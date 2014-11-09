@@ -8,6 +8,7 @@ namespace CheckMyCode.Data.Models
 {
     public enum LanguageType
     {
+        All,
         CSharp,
         Ruby,
         Python,

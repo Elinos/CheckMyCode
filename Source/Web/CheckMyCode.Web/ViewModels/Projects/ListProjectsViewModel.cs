@@ -14,7 +14,7 @@ namespace CheckMyCode.Web.ViewModels.Projects
 
         public string OwnerUserName { get; set; }
 
-        public string Language { get; set; }
+        public LanguageType Language { get; set; }
         
         public void CreateMappings(IConfiguration configuration)
         {
@@ -28,8 +28,7 @@ namespace CheckMyCode.Web.ViewModels.Projects
                                                                .OrderByDescending(c => c.Count())
                                                                .Take(1)
                                                                .FirstOrDefault()
-                                                               .Key
-                                                               .ToString()));
+                                                               .Key));
         }
     }
 }
