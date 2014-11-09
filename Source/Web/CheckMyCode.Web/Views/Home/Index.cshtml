@@ -10,7 +10,7 @@
 
 <div class="container">
     <div class="row">
-        <h2 class="col-md-6 text-center">Last 10 projects</h2>
+        <h2 class="col-md-6 text-center">Last 10 Public Projects</h2>
         <h2 class="col-md-3 text-center col-lg-offset-1">By Language</h2>
     </div>
 
@@ -28,23 +28,24 @@
             }
             @foreach (var item in numList)
             {
-        <div class="row">
-            <h5 class="text-center">
-                @if (@item.ToString() != "Unknown")
+                if (@item.ToString() != "Unknown")
                 {
-                                    @Ajax.ActionLink(@item.ToString(),
-                                        "ChangeLanguage",
-                                        new { language = @item.ToString() },
-                                        new AjaxOptions
-                                        {
-                                            HttpMethod = "GET",
-                                            InsertionMode = InsertionMode.Replace,
-                                            UpdateTargetId = "top10-list-results"
-                                        })
+                                    <div class="row">
+                                        <h5 class="text-center">
+
+                                            @Ajax.ActionLink(@item.ToString(),
+                                                "ChangeLanguage",
+                                                new { language = @item.ToString() },
+                                                new AjaxOptions
+                                                {
+                                                    HttpMethod = "GET",
+                                                    InsertionMode = InsertionMode.Replace,
+                                                    UpdateTargetId = "top10-list-results"
+                                                })
+                                        </h5>
+                                    </div>
+                                    <hr />
                 }
-            </h5>
-        </div>
-        <hr />
             }
         </div>
     </div>
