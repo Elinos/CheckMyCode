@@ -20,28 +20,7 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
         // GET: Projects/List
         public ActionResult Index(string searchString, LanguageType? language, int? page)
         {
-            var pageNumber = page ?? 1;
-            var projectsToList = this.Projects
-                                     .All()
-                                     .Where(p => p.IsPublic)
-                                     .OrderByDescending(p => p.CreatedOn)
-                                     .Project().To<ListProjectsViewModel>();
-            
-            if (searchString != String.Empty && searchString != null)
-            {
-                projectsToList = projectsToList
-                                               .Where(p => p.Name.ToLower().Contains(searchString.ToLower()) ||
-                                                           p.OwnerUserName.ToLower().Contains(searchString.ToLower()));
-            }
-
-            if (language != null && language.ToString() != "All")
-            {
-                projectsToList = projectsToList.Where(p => p.Language == language);
-            }
-
-            var onePageofProjects = projectsToList.ToPagedList(pageNumber, 2);
-            ViewBag.searchString = searchString;
-            ViewBag.language = language;
+            var onePageofProjects = GetFilteredAndPagedList(searchString, language, page);
             
             return Request.IsAjaxRequest()
                    ? (ActionResult)PartialView("_ProjectListResult", onePageofProjects)
@@ -51,6 +30,12 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Search(string searchString, LanguageType language, int? page)
+        {
+            var onePageofProjects = GetFilteredAndPagedList(searchString, language, page);
+            return PartialView("_ProjectListResult", onePageofProjects);
+        }
+ 
+        private IPagedList<ListProjectsViewModel> GetFilteredAndPagedList(string searchString, LanguageType? language, int? page)
         {
             var result = this.Projects
                              .All()
@@ -74,7 +59,7 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
             var onePageofProjects = result.ToPagedList(pageNumber, 2);
             ViewBag.searchString = searchString;
             ViewBag.language = language;
-            return PartialView("_ProjectListResult", onePageofProjects);
+            return onePageofProjects;
         }
     }
 }
