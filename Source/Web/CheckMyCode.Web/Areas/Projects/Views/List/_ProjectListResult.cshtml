@@ -25,7 +25,7 @@
     </div>
 }
 @Html.PagedListPager((IPagedList)Model,
-    page => Url.Action("Index", new { page }),
+    page => Url.Action("Index", new { page, searchString = ViewBag.searchString, language = ViewBag.language }),
     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions
     {
         HttpMethod = "GET",
