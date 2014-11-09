@@ -1,0 +1,15 @@
+﻿@model IEnumerable<CheckMyCode.Web.ViewModels.Projects.ListProjectsViewModel>
+@foreach (var project in Model)
+{
+    <div class="row">
+        <div class="col-lg-2">
+            @project.Name
+        </div>
+        <div class="col-lg-2">
+            @project.Language
+        </div>
+        <div class="col-lg-2">
+            @project.OwnerUserName
+        </div>
+    </div>
+}

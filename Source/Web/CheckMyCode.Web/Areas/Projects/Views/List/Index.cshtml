@@ -1,14 +1,40 @@
 ﻿@model IEnumerable<CheckMyCode.Web.ViewModels.Projects.ListProjectsViewModel>
 @{
-    ViewBag.Title = "List of  Projects";
+    ViewBag.Title = "List of Projects";
 }
-@foreach (var project in Model)
-{
-    <div class="row">
-        @project.Name
-        @project.OwnerUserName
-        @project.Language
+<div class="row">
+    <div class="col-lg-8">
+        @using (Ajax.BeginForm("Search", null,
+            new AjaxOptions
+            {
+                UpdateTargetId = "list-results",
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "POST"
+            }, new { id = "searchForm", @class = "pull-right form-inline" }))
+        {
+                    @Html.AntiForgeryToken()
+
+                    <input type="text" name="searchString" oninput="changed()" class="form-control" />
+                    <input type="submit" value="Search" class="btn btn-info"/>
+        }
     </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        <h4>Name</h4>
+    </div>
+    <div class="col-lg-2">
+        <h4>Language</h4>
+    </div>
+    <div class="col-lg-2">
+        <h4>Owner</h4>
+    </div>
+</div>
+
+<div id="list-results">
+    @Html.Partial("_ProjectListResult", Model)
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/common")
 }
-
-
