@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CheckMyCode.Web.ViewModels.Home
+namespace CheckMyCode.Web.ViewModels.Projects
 {
     public class ListProjectsViewModel : IMapFrom<Project>, IHaveCustomMappings
     {

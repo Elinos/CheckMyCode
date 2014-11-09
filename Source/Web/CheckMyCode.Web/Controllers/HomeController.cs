@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
-using CheckMyCode.Web.ViewModels.Home;
+using CheckMyCode.Web.ViewModels.Projects;
 
 namespace CheckMyCode.Web.Controllers
 {
@@ -25,6 +25,8 @@ namespace CheckMyCode.Web.Controllers
             var projects = this.projects
                                .All()
                                .Where(p => p.IsPublic)
+                               .OrderByDescending(p => p.CreatedOn)
+                               .Take(10)
                                .Project()
                                .To<ListProjectsViewModel>();
 
