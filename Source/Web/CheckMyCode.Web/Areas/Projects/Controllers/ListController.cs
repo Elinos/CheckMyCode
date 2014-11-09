@@ -7,34 +7,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace CheckMyCode.Web.Areas.Projects.Controllers
 {
     public class ListController : ProjectsBaseController
     {
-        public ListController(IDeletableEntityRepository<Project> projects)
-            : base(projects)
+        public ListController(IDeletableEntityRepository<Project> projects) : base(projects)
         {
         }
-
+        
         // GET: Projects/List
-        public ActionResult Index()
+        public ActionResult Index(string searchString, LanguageType? language, int? page)
         {
+            var pageNumber = page ?? 1;
             var projectsToList = this.Projects
                                      .All()
                                      .Where(p => p.IsPublic)
+                                     .OrderByDescending(p => p.CreatedOn)
                                      .Project().To<ListProjectsViewModel>();
-            
-            return View(projectsToList);
+
+            var onePageofProjects = projectsToList.ToPagedList(pageNumber, 2);
+
+            return Request.IsAjaxRequest()
+                   ? (ActionResult)PartialView("_ProjectListResult", onePageofProjects)
+                   : View(onePageofProjects);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Search(string searchString, LanguageType language)
+        public ActionResult Search(string searchString, LanguageType language, int? page)
         {
             var result = this.Projects
                              .All()
                              .Where(p => p.IsPublic)
+                             .OrderByDescending(p => p.CreatedOn)
                              .Project()
                              .To<ListProjectsViewModel>();
             
@@ -49,7 +56,9 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
             {
                 result = result.Where(p => p.Language == language);
             }
-            return PartialView("_ProjectListResult", result);
+            var pageNumber = page ?? 1;
+            var onePageofProjects = result.ToPagedList(pageNumber, 2);
+            return PartialView("_ProjectListResult", onePageofProjects);
         }
     }
 }

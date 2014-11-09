@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CheckMyCode.Web.Areas.Projects.Models.MyProjectsViewModel>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<CheckMyCode.Web.Areas.Projects.Models.MyProjectsViewModel>
 @if (Model.Count() == 0)
 {
     <div class="row text-center">
@@ -28,3 +31,5 @@
         </div>
     </div>
 }
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "list-results" }))
+

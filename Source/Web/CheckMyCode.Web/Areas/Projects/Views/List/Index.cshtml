@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CheckMyCode.Web.Areas.Projects.Models.ListProjectsViewModel>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<CheckMyCode.Web.Areas.Projects.Models.ListProjectsViewModel>
 @{
     ViewBag.Title = "List of Projects";
 }
@@ -44,6 +47,7 @@
 <div id="list-results">
     @Html.Partial("_ProjectListResult", Model)
 </div>
+
 
 @section scripts{
     @Scripts.Render("~/bundles/common")

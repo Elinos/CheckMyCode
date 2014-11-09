@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CheckMyCode.Web.Areas.Projects.Models.MyProjectsViewModel>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<CheckMyCode.Web.Areas.Projects.Models.MyProjectsViewModel>
 @{
     ViewBag.Title = "My Projects";
 }
