@@ -18,7 +18,13 @@
         {
             entity.IsDeleted = true;
             entity.DeletedOn = DateTime.Now;
-            base.ChangeEntityState(entity, EntityState.Modified);
+            var entry = this.Context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                this.DbSet.Attach(entity);
+            }
+
+            entry.State = EntityState.Modified;
         }
 
         public void HardDelete(T entity)

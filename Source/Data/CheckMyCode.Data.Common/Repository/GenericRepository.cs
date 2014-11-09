@@ -36,17 +36,40 @@
 
         public virtual void Add(T entity)
         {
-            this.ChangeEntityState(entity, EntityState.Added);
+            DbEntityEntry entry = this.Context.Entry(entity);
+            if (entry.State != EntityState.Detached)
+            {
+                entry.State = EntityState.Added;
+            }
+            else
+            {
+                this.DbSet.Add(entity);
+            }
         }
 
         public virtual void Update(T entity)
         {
-            this.ChangeEntityState(entity, EntityState.Modified);
+            DbEntityEntry entry = this.Context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                this.DbSet.Attach(entity);
+            }
+
+            entry.State = EntityState.Modified;
         }
 
         public virtual void Delete(T entity)
         {
-            this.ChangeEntityState(entity, EntityState.Deleted);
+            DbEntityEntry entry = this.Context.Entry(entity);
+            if (entry.State != EntityState.Deleted)
+            {
+                entry.State = EntityState.Deleted;
+            }
+            else
+            {
+                this.DbSet.Attach(entity);
+                this.DbSet.Remove(entity);
+            }
         }
 
         public virtual void Delete(int id)
@@ -61,7 +84,9 @@
 
         public virtual void Detach(T entity)
         {
-            this.ChangeEntityState(entity, EntityState.Detached);
+            DbEntityEntry entry = this.Context.Entry(entity);
+
+            entry.State = EntityState.Detached;
         }
 
         public int SaveChanges()
@@ -72,17 +97,6 @@
         public void Dispose()
         {
             this.Context.Dispose();
-        }
-
-        public void ChangeEntityState(T entity, EntityState state)
-        {
-            var entry = this.Context.Entry(entity);
-            if (entry.State == EntityState.Detached)
-            {
-                this.DbSet.Attach(entity);
-            }
-
-            entry.State = state;
         }
     }
 }

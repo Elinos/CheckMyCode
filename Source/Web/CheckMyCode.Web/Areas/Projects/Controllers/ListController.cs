@@ -12,7 +12,8 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
 {
     public class ListController : ProjectsBaseController
     {
-        public ListController(IRepository<Project> projects) : base(projects)
+        public ListController(IDeletableEntityRepository<Project> projects)
+            : base(projects)
         {
         }
 

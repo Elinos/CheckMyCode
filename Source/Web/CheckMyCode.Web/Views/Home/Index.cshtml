@@ -17,21 +17,9 @@
     <div class="row">
         <div class="col-md-6">
             <hr />
-            @foreach (var project in Model)
-            {
-                            <div class="row">
-                                <div class="row">
-                                    <h4 class="col-lg-5 col-lg-offset-1">
-                                        <a href="#">@project.Name</a>
-                                    </h4>
-                                    <h5 class="col-lg-2">
-                                        <i>@project.Language</i>
-                                    </h5>
-                                    <h5 class="col-lg-2">@project.OwnerUserName</h5>
-                                </div>
-                            </div>
-                            <hr />
-            }
+            <div id="top10-list-results">
+                @Html.Partial("_TopTenProjectListResult", Model)
+            </div>
         </div>
         <div class="col-md-3 col-lg-offset-1">
             <hr />
@@ -44,7 +32,15 @@
             <h5 class="text-center">
                 @if (@item.ToString() != "Unknown")
                 {
-                                    @item
+                                    @Ajax.ActionLink(@item.ToString(),
+                                        "ChangeLanguage",
+                                        new { language = @item.ToString() },
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "GET",
+                                            InsertionMode = InsertionMode.Replace,
+                                            UpdateTargetId = "top10-list-results"
+                                        })
                 }
             </h5>
         </div>

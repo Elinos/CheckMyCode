@@ -1,0 +1,22 @@
+﻿@model IEnumerable<CheckMyCode.Web.ViewModels.Projects.ListProjectsViewModel>
+@if (Model.Count() == 0)
+{
+    <div class="row text-center">
+        <h4>No Projects</h4>
+    </div>
+}
+@foreach (var project in Model)
+{
+    <div class="row">
+        <div class="row">
+            <h4 class="col-lg-5 col-lg-offset-1">
+                <a href="#">@project.Name</a>
+            </h4>
+            <h5 class="col-lg-2">
+                <i>@project.Language</i>
+            </h5>
+            <h5 class="col-lg-2">@project.OwnerUserName</h5>
+        </div>
+    </div>
+    <hr />
+}

@@ -13,9 +13,9 @@ namespace CheckMyCode.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepository<Project> projects;
+        private IDeletableEntityRepository<Project> projects;
 
-        public HomeController(IRepository<Project> projects)
+        public HomeController(IDeletableEntityRepository<Project> projects)
         {
             this.projects = projects;
         }
@@ -31,6 +31,23 @@ namespace CheckMyCode.Web.Controllers
                                .To<ListProjectsViewModel>();
 
             return View(projects);
+        }
+
+        public ActionResult ChangeLanguage(string language)
+        {
+            var projects = this.projects
+                               .All()
+                               .Where(p => p.IsPublic)
+                               .OrderByDescending(p => p.CreatedOn)
+                               .Take(10)
+                               .Project()
+                               .To<ListProjectsViewModel>();
+            if (language != String.Empty && language != "All")
+            {
+                projects = projects.Where(p => p.Language.ToString() == language);
+            }
+
+            return PartialView("_TopTenProjectListResult", projects);
         }
     }
 }
