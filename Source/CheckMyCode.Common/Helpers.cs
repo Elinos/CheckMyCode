@@ -12,6 +12,8 @@ namespace CheckMyCode.Common
         public static LanguageType GetLanguageType(string filename)
         {
             int fileExtPos = filename.LastIndexOf(".");
+            if (fileExtPos < 0)
+                return LanguageType.Unknown;
             string extention = filename.Substring(fileExtPos);
 
             if (extention.StartsWith(".css"))

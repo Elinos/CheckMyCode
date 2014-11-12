@@ -1,0 +1,23 @@
+﻿@model CheckMyCode.Web.Areas.Projects.Models.FilesViewModel
+@{
+    ViewBag.Title = "Files";
+}
+<h1>@Model.Filename</h1>
+
+<pre class="file">@Model.Content</pre>
+<a href="javascript:history.back()" class="btn btn-sm btn-info">Back</a>
+
+@section styles{
+    @Styles.Render("~/Content/snippet")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/snippet")
+    <script>
+        $("pre.file").snippet("@Model.LanguageType", {
+                                  style: "emacs", collapse: true,
+                                  startCollapsed: false
+                              });
+    </script>
+}
+

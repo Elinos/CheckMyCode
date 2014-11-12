@@ -1,3 +1,5 @@
-﻿function changed() {
-    $("#searchForm").submit();
-}
+﻿(function () {
+    function changed() {
+        $("#searchForm").submit();
+    }
+})();

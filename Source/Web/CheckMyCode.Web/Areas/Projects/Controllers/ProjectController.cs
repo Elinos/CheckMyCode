@@ -1,9 +1,11 @@
 ﻿using AutoMapper.QueryableExtensions;
+using AutoMapper.QueryableExtensions;
 using CheckMyCode.Data.Common.Repository;
 using CheckMyCode.Data.Models;
 using CheckMyCode.Web.Areas.Projects.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,7 +18,7 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
         {
         }
 
-        // GET: Projects/Project
+        [OutputCache(Duration = 10 * 60)]
         public ActionResult Index(int id)
         {
             var project = this.Projects
@@ -27,6 +29,27 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
                               .FirstOrDefault();
 
             return View(project);
+        }
+
+        [OutputCache(Duration = 10 * 60)]
+        public ActionResult Files(int id, int fileId)
+        {
+            var project = this.Projects.All().FirstOrDefault(p => p.Id == id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            var file = project.Files.FirstOrDefault(f => f.Id == fileId);
+
+            if (file == null)
+            {
+                return HttpNotFound();
+            }
+            var model = new FilesViewModel();
+            AutoMapper.Mapper.Map(file, model);
+
+            return View(model);
         }
     }
 }
