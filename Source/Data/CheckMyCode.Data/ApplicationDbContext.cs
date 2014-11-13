@@ -20,9 +20,13 @@ namespace CheckMyCode.Data
             return new ApplicationDbContext();
         }
 
-        public IDbSet<Project> Projects { get; set; }
+        public virtual IDbSet<Project> Projects { get; set; }
         
-        public IDbSet<File> Files { get; set; }
+        public virtual IDbSet<File> Files { get; set; }
+
+        public virtual IDbSet<Comment> Comments { get; set; }
+
+        public virtual IDbSet<FileRevision> FileRevisions { get; set; }
 
         public override int SaveChanges()
         {

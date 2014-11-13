@@ -6,7 +6,7 @@
 
 <pre class="file">@Model.Content</pre>
 
-<a href="javascript:history.back()" class="btn btn-info">Back</a>
+@Html.ActionLink("Back", "Index", new { id = Request["id"] }, new { @class = "btn btn-info" })
 @Html.ActionLink("Edit", "EditFile", new { fileId = Model.Id }, new { @class = "btn btn-default" })
 
 @section styles{

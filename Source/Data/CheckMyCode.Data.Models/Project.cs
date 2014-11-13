@@ -11,9 +11,11 @@ namespace CheckMyCode.Data.Models
 {
     public class Project : AuditInfo, IDeletableEntity
     {
+        private readonly ICollection<File> files;
+
         public Project()
         {
-            this.Files = new HashSet<File>();
+            this.files = new HashSet<File>();
         }
 
         [Key]
@@ -33,6 +35,12 @@ namespace CheckMyCode.Data.Models
 
         public DateTime? DeletedOn { get; set; }
         
-        public virtual ICollection<File> Files { get; set; }
+        public virtual ICollection<File> Files
+        {
+            get
+            {
+                return this.files;
+            }
+        }
     }
 }

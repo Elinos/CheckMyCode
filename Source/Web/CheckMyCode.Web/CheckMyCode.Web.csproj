@@ -220,6 +220,7 @@
     <Compile Include="Areas\Projects\Controllers\ProjectsBaseController.cs" />
     <Compile Include="Areas\Projects\Models\FilesViewModel.cs" />
     <Compile Include="Areas\Projects\Models\MyProjectsViewModel.cs" />
+    <Compile Include="Areas\Projects\Models\EditFileViewModel.cs" />
     <Compile Include="Areas\Projects\ProjectsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

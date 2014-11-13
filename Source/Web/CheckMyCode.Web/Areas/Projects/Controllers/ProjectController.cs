@@ -6,8 +6,10 @@ using CheckMyCode.Web.Areas.Projects.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace CheckMyCode.Web.Areas.Projects.Controllers
 {
@@ -64,16 +66,31 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
                 return HttpNotFound();
             }
 
-            var model = new FilesViewModel();
+            var model = new EditFileViewModel();
             AutoMapper.Mapper.Map(file, model);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryTokenAttribute]
-        public ActionResult SaveFile(FilesViewModel model)
+        public ActionResult EditFile(EditFileViewModel model)
         {
-            return null;
+            var file = FilesRepo.GetById(model.FileId);
+            if (file != null && ModelState.IsValid)
+            {
+                var fileRevision = new FileRevision()
+                {
+                    ChangedFile = Encoding.Default.GetBytes(model.FileAsString),
+                    AuthorId = User.Identity.GetUserId(),
+                    Comment = model.Comment
+                };
+                
+                file.FileRevisions.Add(fileRevision);
+                FilesRepo.SaveChanges();
+                return RedirectToAction("Files", new { id = file.ProjectId, fileId = model.FileId });
+            }
+
+            return View(model);
         }
     }
 }
