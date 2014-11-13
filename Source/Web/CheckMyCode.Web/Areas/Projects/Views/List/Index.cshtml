@@ -1,5 +1,4 @@
-﻿@using PagedList.Mvc;
-@using PagedList;
+﻿@using PagedList;
 
 @model IPagedList<CheckMyCode.Web.Areas.Projects.Models.ListProjectsViewModel>
 @{
@@ -50,7 +49,4 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/common")
-    <script>
-        $("#language-dropdown").val('0');
-    </script>
 }

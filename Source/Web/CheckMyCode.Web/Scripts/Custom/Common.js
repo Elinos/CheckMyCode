@@ -1,5 +1,4 @@
-﻿(function () {
-    function changed() {
-        $("#searchForm").submit();
-    }
-})();
+﻿$("#language-dropdown").val('0');
+function changed() {
+    $("#searchForm").submit();
+}

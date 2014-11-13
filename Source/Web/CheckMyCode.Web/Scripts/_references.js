@@ -63,4 +63,3 @@
 /// <reference path="codemirror/addon/tern/tern.js" />
 /// <reference path="codemirror/addon/tern/worker.js" />
 /// <reference path="codemirror/addon/wrap/hardwrap.js" />
-/// <reference path="codemirror/mode/clike/clike.js" />

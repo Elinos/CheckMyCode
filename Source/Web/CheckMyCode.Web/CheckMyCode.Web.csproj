@@ -359,7 +359,11 @@
     <Content Include="Scripts\CodeMirror\addon\tern\worker.js" />
     <Content Include="Scripts\CodeMirror\addon\wrap\hardwrap.js" />
     <Content Include="Scripts\CodeMirror\codemirror.js" />
-    <Content Include="Scripts\CodeMirror\mode\clike\clike.js" />
+    <Content Include="Scripts\CodeMirror\mode\javascript\index.html" />
+    <Content Include="Scripts\CodeMirror\mode\javascript\javascript.js" />
+    <Content Include="Scripts\CodeMirror\mode\javascript\json-ld.html" />
+    <Content Include="Scripts\CodeMirror\mode\javascript\test.js" />
+    <Content Include="Scripts\CodeMirror\mode\javascript\typescript.html" />
     <Content Include="Scripts\Custom\CodeMirrorSetup.js" />
     <Content Include="Scripts\Custom\Common.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
