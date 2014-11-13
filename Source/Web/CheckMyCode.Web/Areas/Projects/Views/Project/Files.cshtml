@@ -5,7 +5,9 @@
 <h1>@Model.Filename</h1>
 
 <pre class="file">@Model.Content</pre>
-<a href="javascript:history.back()" class="btn btn-sm btn-info">Back</a>
+
+<a href="javascript:history.back()" class="btn btn-info">Back</a>
+@Html.ActionLink("Edit", "EditFile", new { fileId = Model.Id }, new { @class = "btn btn-default" })
 
 @section styles{
     @Styles.Render("~/Content/snippet")
@@ -20,4 +22,5 @@
                               });
     </script>
 }
+
 

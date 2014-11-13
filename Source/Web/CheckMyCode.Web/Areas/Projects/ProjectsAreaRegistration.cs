@@ -15,6 +15,10 @@ namespace CheckMyCode.Web.Areas.Projects
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
+                "Project_editFile",
+                "Projects/Project/{action}",
+                new { controller = "Project" });
+            context.MapRoute(
                 "Project_info",
                 "Projects/Project/{id}",
                 new { controller = "Project", action = "Index" });

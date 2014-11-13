@@ -10,6 +10,8 @@ namespace CheckMyCode.Web.Areas.Projects.Models
 {
     public class FilesViewModel : IMapFrom<File>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string Content { get; set; }
 
         public string Filename { get; set; }

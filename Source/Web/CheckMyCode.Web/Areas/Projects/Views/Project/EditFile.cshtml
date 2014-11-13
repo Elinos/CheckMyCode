@@ -1,0 +1,19 @@
+﻿@model CheckMyCode.Web.Areas.Projects.Models.FilesViewModel
+@using (Html.BeginForm("SaveFile", "Project", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    @Html.TextAreaFor(m => m.Content, new { id = "fileContent" })
+    <input type = "submit"
+           value = "Save" class="btn btn-default" />
+    <a href = "javascript:history.back()"
+       class="btn btn-info" > Cancel </a>
+}
+
+@section styles{
+    @Styles.Render("~/Content/codeMirror")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/codeMirror")
+}
