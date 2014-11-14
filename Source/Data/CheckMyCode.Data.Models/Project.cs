@@ -11,7 +11,7 @@ namespace CheckMyCode.Data.Models
 {
     public class Project : AuditInfo, IDeletableEntity
     {
-        private readonly ICollection<File> files;
+        private ICollection<File> files;
 
         public Project()
         {
@@ -25,7 +25,7 @@ namespace CheckMyCode.Data.Models
 
         public string OwnerId { get; set; }
 
-        public ApplicationUser Owner { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
 
         [Index]
         public bool IsPublic { get; set; }
@@ -40,6 +40,10 @@ namespace CheckMyCode.Data.Models
             get
             {
                 return this.files;
+            }
+            set
+            {
+                this.files = value;
             }
         }
     }

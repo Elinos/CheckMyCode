@@ -20,11 +20,11 @@ namespace CheckMyCode.Data.Models
         
         public int FileId { get; set; }
 
-        public File File { get; set; }
+        public virtual File File { get; set; }
 
         public string AuthorId { get; set; }
 
-        public ApplicationUser Author { get; set; }
+        public virtual ApplicationUser Author { get; set; }
 
         public bool IsDeleted { get; set; }
 

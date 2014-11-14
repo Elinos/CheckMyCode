@@ -10,8 +10,8 @@ namespace CheckMyCode.Data.Models
 {
     public class File : AuditInfo, IDeletableEntity
     {
-        private readonly ICollection<Comment> comments;
-        private readonly ICollection<FileRevision> fileRevisions;
+        private ICollection<Comment> comments;
+        private ICollection<FileRevision> fileRevisions;
         
         public File()
         {
@@ -35,25 +35,33 @@ namespace CheckMyCode.Data.Models
         public int ProjectId { get; set; }
 
         [Required]
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
 
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
 
-        public ICollection<Comment> Comments
+        public virtual ICollection<Comment> Comments
         {
             get
             {
                 return this.comments;
             }
+            set
+            {
+                this.comments = value;
+            }
         }
 
-        public ICollection<FileRevision> FileRevisions
+        public virtual ICollection<FileRevision> FileRevisions
         {
             get
             {
                 return this.fileRevisions;
+            }
+            set
+            {
+                this.fileRevisions = value;
             }
         }
     }

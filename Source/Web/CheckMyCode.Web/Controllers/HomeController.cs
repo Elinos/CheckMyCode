@@ -20,6 +20,7 @@ namespace CheckMyCode.Web.Controllers
             this.projects = projects;
         }
 
+        //[OutputCache(Duration = 10 * 60)]
         public ActionResult Index()
         {
             var projects = this.projects
