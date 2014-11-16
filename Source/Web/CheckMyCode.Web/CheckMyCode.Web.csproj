@@ -128,6 +128,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -213,11 +214,15 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Projects\Controllers\CommentsBaseController.cs" />
+    <Compile Include="Areas\Projects\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Projects\Controllers\ListController.cs" />
     <Compile Include="Areas\Projects\Controllers\ManagementController.cs" />
     <Compile Include="Areas\Projects\Controllers\MyProjectsController.cs" />
     <Compile Include="Areas\Projects\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Projects\Controllers\ProjectsBaseController.cs" />
+    <Compile Include="Areas\Projects\Models\AddCommentViewModel.cs" />
+    <Compile Include="Areas\Projects\Models\CommentViewModel.cs" />
     <Compile Include="Areas\Projects\Models\FilesViewModel.cs" />
     <Compile Include="Areas\Projects\Models\MyProjectsViewModel.cs" />
     <Compile Include="Areas\Projects\Models\EditFileViewModel.cs" />
@@ -297,6 +302,9 @@
     <Content Include="Areas\Projects\Views\MyProjects\_MyProjectsList.cshtml" />
     <Content Include="Areas\Projects\Views\Project\Files.cshtml" />
     <Content Include="Areas\Projects\Views\Project\EditFile.cshtml" />
+    <Content Include="Areas\Projects\Views\Shared\_AddComment.cshtml" />
+    <Content Include="Areas\Projects\Views\Shared\_CommentPartial.cshtml" />
+    <Content Include="Areas\Projects\Views\Comments\ListComments.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

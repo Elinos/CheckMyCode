@@ -23,7 +23,6 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
             this.FilesRepo = files;
         }
 
-        //[OutputCache(Duration = 10 * 60)]
         public ActionResult Index(int id)
         {
             var project = this.Projects
@@ -32,11 +31,10 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
                               .Project()
                               .To<ProjectViewModel>()
                               .FirstOrDefault();
-
+            
             return View(project);
         }
 
-        //[OutputCache(Duration = 10 * 60)]
         public ActionResult Files(int id, int fileId)
         {
             var project = this.Projects.All().FirstOrDefault(p => p.Id == id);

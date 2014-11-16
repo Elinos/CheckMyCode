@@ -17,10 +17,30 @@
 @foreach (var file in Model.Files)
 {
     <div class="row">
-        <div class="col-lg-8">@Html.ActionLink(@file.Filename, "Files", new {area = "Projects", id = Model.Id, fileId = @file.Id}, new {})</div>
+        <div class="col-lg-8">@Html.ActionLink(@file.Filename, "Files", new { area = "Projects", id = Model.Id, fileId = @file.Id }, new { })</div>
         <div class="col-lg-2">@file.LanguageType</div>
     </div>
 }
+@Html.Partial("_AddComment", new CheckMyCode.Web.Areas.Projects.Models.AddCommentViewModel(Model.Id))
+
+<h3>Comments</h3>
+<div id="comments">
+    @if (Model.Comments.Count() == 0)
+    {
+        <h5>
+            <strong>No Comments</strong>
+        </h5>
+    }
+    @*@Html.Action("ListComments", "Comments", new { projectId = Model.Id }))*@
+    @foreach (var comment in Model.Comments.OrderByDescending(m => m.CreatedOn).Take(10))
+    {
+            @Html.Partial("_CommentPartial", comment)
+    }
+</div>
+
 <br />
 <a href="javascript:history.back()" class="btn btn-sm btn-info">Back</a>
-
+    
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

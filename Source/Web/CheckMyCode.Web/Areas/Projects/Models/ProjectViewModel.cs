@@ -19,5 +19,7 @@ namespace CheckMyCode.Web.Areas.Projects.Models
 
         [Required]
         public IEnumerable<File> Files { get; set; }
+
+        public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }

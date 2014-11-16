@@ -1,0 +1,25 @@
+﻿@model CheckMyCode.Web.Areas.Projects.Models.AddCommentViewModel
+@using (Ajax.BeginForm("AddComment", "Comments", new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.InsertBefore,
+    UpdateTargetId = "comments"
+}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h3>Add your comment</h3>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.ProjectId)
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.Text, new { @class = "form-control", style = "width:300px" })
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

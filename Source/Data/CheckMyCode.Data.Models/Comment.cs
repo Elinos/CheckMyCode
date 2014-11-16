@@ -14,16 +14,16 @@ namespace CheckMyCode.Data.Models
         public int Id { get; set; }
         
         [Required]
-        [StringLength(200, MinimumLength = 5)]
+        [StringLength(2000, MinimumLength = 50)]
         public string Text { get; set; }
-
+        
         public string AuthorId { get; set; }
-
+        
         public virtual ApplicationUser Author { get; set; }
 
-        public string FileId { get; set; }
+        public int ProjectId { get; set; }
 
-        public virtual File File { get; set; }
+        public virtual Project Project { get; set; }
 
         public bool IsDeleted { get; set; }
 

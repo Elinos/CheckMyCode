@@ -12,10 +12,12 @@ namespace CheckMyCode.Data.Models
     public class Project : AuditInfo, IDeletableEntity
     {
         private ICollection<File> files;
+        private ICollection<Comment> comments;
 
         public Project()
         {
             this.files = new HashSet<File>();
+            this.comments = new HashSet<Comment>();
         }
 
         [Key]
@@ -44,6 +46,18 @@ namespace CheckMyCode.Data.Models
             set
             {
                 this.files = value;
+            }
+        }
+
+        public virtual ICollection<Comment> Comments
+        {
+            get
+            {
+                return this.comments;
+            }
+            set
+            {
+                this.comments = value;
             }
         }
     }

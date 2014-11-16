@@ -1,0 +1,7 @@
+﻿@model IEnumerable<CheckMyCode.Web.Areas.Projects.Models.CommentViewModel>
+
+@foreach (var comment in Model)
+{
+    @Html.Partial("_CommentPartial", comment)
+}
+

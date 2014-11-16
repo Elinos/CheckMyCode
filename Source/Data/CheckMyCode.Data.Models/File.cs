@@ -10,12 +10,10 @@ namespace CheckMyCode.Data.Models
 {
     public class File : AuditInfo, IDeletableEntity
     {
-        private ICollection<Comment> comments;
         private ICollection<FileRevision> fileRevisions;
         
         public File()
         {
-            this.comments = new HashSet<Comment>();
             this.fileRevisions = new HashSet<FileRevision>();
         }
 
@@ -40,19 +38,7 @@ namespace CheckMyCode.Data.Models
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
-
-        public virtual ICollection<Comment> Comments
-        {
-            get
-            {
-                return this.comments;
-            }
-            set
-            {
-                this.comments = value;
-            }
-        }
-
+        
         public virtual ICollection<FileRevision> FileRevisions
         {
             get

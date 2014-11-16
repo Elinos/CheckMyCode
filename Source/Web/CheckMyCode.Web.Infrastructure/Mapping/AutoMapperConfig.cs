@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
     using AutoMapper;
 
     public class AutoMapperConfig
@@ -41,6 +40,7 @@
             foreach (var map in maps)
             {
                 Mapper.CreateMap(map.Source, map.Destination);
+                Mapper.CreateMap(map.Destination, map.Source);
             }
         }
 
