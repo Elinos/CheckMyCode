@@ -1,0 +1,59 @@
+﻿@using CheckMyCode.Web.Areas.Administration.Models
+@using Kendo.Mvc.UI;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+@(Html.Kendo()
+      .Grid<ProjectsAdministrationViewModel>()
+      .Name("grid-books")
+      .Columns(columns =>
+      {
+          columns.Bound(model => model.Name);
+          columns.Bound(model => model.OwnerUsername);
+          columns.Bound(model => model.IsPublic);
+          columns.Command(command =>
+          {
+              command.Edit();
+              command.Destroy();
+          });
+      })
+      .ToolBar(tool =>
+      {
+          tool.Create();
+      })
+      .Pageable(page =>
+      {
+          page.Refresh(true);
+          page.PreviousNext(true);
+          page.Numeric(true);
+      })
+      .Sortable(sort =>
+      {
+          sort.AllowUnsort(false);
+          sort.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Navigatable()
+      .Editable(edit =>
+      {
+          edit.Mode(GridEditMode.InLine);
+      })
+      .DataSource(data =>
+      {
+          data.Ajax()
+              .Model(model =>
+              {
+                  model.Id(p => p.Name);
+                  model.Field(p => p.OwnerUsername).Editable(false);
+                  model.Field(p => p.IsPublic);
+              })
+              .PageSize(5)
+              .ServerOperation(true)
+              .Create("CreateProject", "Projects")
+              .Read("ReadProjects", "Projects")
+              .Update("UpdateProject", "Projects")
+              .Destroy("DeleteProject", "Projects");
+      }))

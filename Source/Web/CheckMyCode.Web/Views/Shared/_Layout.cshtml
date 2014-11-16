@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>@ViewBag.Title - My ASP.NET Application</title>
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/kendo")
         @RenderSection("styles", required: false)
     </head>
     <body>
@@ -35,6 +36,7 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/unobtrusive-jquery")
         @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/kendo")
         @RenderSection("scripts", required: false)
     </body>
 </html>
