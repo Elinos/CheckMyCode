@@ -90,5 +90,12 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
 
             return View(model);
         }
+
+        public ActionResult Download(int id) 
+        {
+            var file = this.FilesRepo.All().Where(f => f.Id == id).FirstOrDefault();
+            var contents = file.Content;
+            return File(contents, "text/plain", file.Filename);
+        }
     }
 }

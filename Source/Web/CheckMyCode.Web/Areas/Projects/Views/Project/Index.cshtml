@@ -19,6 +19,7 @@
     <div class="row">
         <div class="col-lg-8">@Html.ActionLink(@file.Filename, "Files", new { area = "Projects", id = Model.Id, fileId = @file.Id }, new { })</div>
         <div class="col-lg-2">@file.LanguageType</div>
+        <div class="col-lg-2">@Html.ActionLink("Download", "Download", new { id = file.Id })</div>
     </div>
 }
 @Html.Partial("_AddComment", new CheckMyCode.Web.Areas.Projects.Models.AddCommentViewModel(Model.Id))
