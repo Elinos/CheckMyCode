@@ -6,13 +6,41 @@
 
 <pre class="file">@Model.Content</pre>
 
+<h2>File Revisions</h2>
+@if (Model.FileRevisions.Count() == 0)
+{
+    <h5>
+        <strong>No File Revisions</strong>
+    </h5>
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-2">
+            <b>Link</b>
+        </div>
+        <div class="col-md-8">
+            <b>Comment</b>
+        </div>
+        <div class="col-md-2">
+            <b>Author</b>
+        </div>
+    </div>
+    <hr />
+    foreach (var revision in Model.FileRevisions.OrderByDescending(m => m.CreatedOn).Take(10))
+    {
+            @Html.Partial("_FileRevisionPartial", revision)
+    }
+}
+
+
 @Html.ActionLink("Back", "Index", new { id = Request["id"] }, new { @class = "btn btn-info" })
 @Html.ActionLink("Edit", "EditFile", new { fileId = Model.Id }, new { @class = "btn btn-default" })
-
+    
 @section styles{
     @Styles.Render("~/Content/snippet")
 }
-
+    
 @section scripts{
     @Scripts.Render("~/bundles/snippet")
     <script>

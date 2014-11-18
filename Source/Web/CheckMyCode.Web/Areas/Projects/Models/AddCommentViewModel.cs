@@ -22,8 +22,8 @@ namespace CheckMyCode.Web.Areas.Projects.Models
         [Required]
         public int ProjectId { get; set; }
 
-        [Required]
-        [StringLength(2000, MinimumLength = 50)]
+        [Required(ErrorMessage = "Required!")]
+        [StringLength(2000, MinimumLength = 5, ErrorMessage = "The comment must be between 5 and 2000 chars!")]
         public string Text { get; set; }
     }
 }

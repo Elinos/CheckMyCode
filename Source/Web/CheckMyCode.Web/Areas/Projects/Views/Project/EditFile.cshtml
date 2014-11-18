@@ -19,8 +19,7 @@
     <div class="form-group">
         <input type="submit"
                value="Save" class="btn btn-default" />
-        <a href="javascript:history.back()"
-           class="btn btn-info">Cancel</a>
+        @Html.ActionLink("Back", "Files", new { id = Model.ProjectId, fileId = Model.FileId }, new { @class = "btn btn-info" })
     </div>
 }
 
@@ -29,5 +28,6 @@
 }
 
 @section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/codeMirror")
 }

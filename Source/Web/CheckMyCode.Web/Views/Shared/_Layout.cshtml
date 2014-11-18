@@ -26,6 +26,15 @@
             </div>
         </div>
         <div class="container body-content">
+            @if (this.TempData["successMessage"] != null)
+            {
+                            <div id="successMessage" class="alert alert-success">@this.TempData["successMessage"]</div>
+
+            }
+            @if (this.TempData["errorMessage"] != null)
+            {
+                            <div id="errorMessage" class="alert alert-danger">@this.TempData["errorMessage"]</div>
+            }
             @RenderBody()
             <hr />
             <footer>
@@ -38,5 +47,9 @@
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/kendo")
         @RenderSection("scripts", required: false)
+        <script>
+            $("#successMessage").show().delay(3000).fadeOut();
+            $("#errorMessage").show().delay(3000).fadeOut();
+        </script>
     </body>
 </html>

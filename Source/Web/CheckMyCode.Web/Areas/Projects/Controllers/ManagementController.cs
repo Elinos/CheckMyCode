@@ -15,8 +15,7 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
 {
     public class ManagementController : ProjectsBaseController
     {
-        public ManagementController(IDeletableEntityRepository<Project> projects)
-            : base(projects)
+        public ManagementController(IDeletableEntityRepository<Project> projects) : base(projects)
         {
         }
 
@@ -70,8 +69,8 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
             
             this.Projects.Add(projectToAdd);
             this.Projects.SaveChanges();
-
-            return RedirectToAction("Create");
+            this.TempData["successMessage"] = "Project created!";
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }

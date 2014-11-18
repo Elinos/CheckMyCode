@@ -14,7 +14,7 @@ namespace CheckMyCode.Data.Models
         public int Id { get; set; }
         
         [Required]
-        [StringLength(2000, MinimumLength = 50)]
+        [StringLength(2000, MinimumLength = 5)]
         public string Text { get; set; }
         
         public string AuthorId { get; set; }

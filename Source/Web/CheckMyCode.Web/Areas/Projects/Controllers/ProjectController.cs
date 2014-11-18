@@ -13,14 +13,18 @@ using Microsoft.AspNet.Identity;
 
 namespace CheckMyCode.Web.Areas.Projects.Controllers
 {
+    [Authorize]
     public class ProjectController : ProjectsBaseController
     {
         public IDeletableEntityRepository<File> FilesRepo { get; set; }
 
+        public IDeletableEntityRepository<FileRevision> RevisionsRepo { get; set; }
+
         public ProjectController(IDeletableEntityRepository<Project> projects,
-            IDeletableEntityRepository<File> files) : base(projects)
+            IDeletableEntityRepository<File> files, IDeletableEntityRepository<FileRevision> revisions) : base(projects)
         {
             this.FilesRepo = files;
+            this.RevisionsRepo = revisions;
         }
 
         public ActionResult Index(int id)
@@ -85,6 +89,7 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
                 
                 file.FileRevisions.Add(fileRevision);
                 FilesRepo.SaveChanges();
+                this.TempData["successMessage"] = "File revision added!";
                 return RedirectToAction("Files", new { id = file.ProjectId, fileId = model.FileId });
             }
 
@@ -96,6 +101,13 @@ namespace CheckMyCode.Web.Areas.Projects.Controllers
             var file = this.FilesRepo.All().Where(f => f.Id == id).FirstOrDefault();
             var contents = file.Content;
             return File(contents, "text/plain", file.Filename);
+        }
+
+        public ActionResult DownloadRevision(int revisionId)
+        {
+            var file = this.RevisionsRepo.All().Where(r => r.Id == revisionId).FirstOrDefault();
+            var contents = file.ChangedFile;
+            return File(contents, "text/plain", file.File.Filename);
         }
     }
 }

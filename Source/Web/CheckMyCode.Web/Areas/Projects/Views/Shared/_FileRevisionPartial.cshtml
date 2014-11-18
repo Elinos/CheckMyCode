@@ -1,0 +1,9 @@
+﻿@model CheckMyCode.Web.Areas.Projects.Models.FileRevisionViewModel
+<div class="row">
+    <div class="col-lg-2">@Html.ActionLink("Download", "DownloadRevision", new { revisionId = Model.Id })</div>
+    <div class="col-md-8" style="word-wrap:break-word">@Model.Comment</div>
+    <div class="col-md-2">
+        <em>@Model.AuthorName</em>
+    </div>
+</div>
+<hr />

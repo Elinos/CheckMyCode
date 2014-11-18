@@ -18,6 +18,8 @@ namespace CheckMyCode.Web.Areas.Projects.Models
 
         public string LanguageType { get; set; }
 
+        public IEnumerable<FileRevisionViewModel> FileRevisions;
+
         public void CreateMappings(AutoMapper.IConfiguration configuration)
         {
             configuration.CreateMap<File, FilesViewModel>()

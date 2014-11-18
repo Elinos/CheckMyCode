@@ -32,7 +32,6 @@
             <strong>No Comments</strong>
         </h5>
     }
-    @*@Html.Action("ListComments", "Comments", new { projectId = Model.Id }))*@
     @foreach (var comment in Model.Comments.OrderByDescending(m => m.CreatedOn).Take(10))
     {
             @Html.Partial("_CommentPartial", comment)
@@ -40,7 +39,7 @@
 </div>
 
 <br />
-<a href="javascript:history.back()" class="btn btn-sm btn-info">Back</a>
+@Html.ActionLink("Back", "Index", "List", null, new { @class = "btn btn-info" })
     
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
