@@ -22,6 +22,7 @@ namespace CheckMyCode.Web.Areas.Projects.Models
         [AllowHtml]
         public string FileAsString { get; set; }
 
+        [AllowHtml]
         [Required]
         [StringLength(200, MinimumLength = 5, ErrorMessage = "The comment must be between 5 and 2000 chars!")]
         public string Comment { get; set; }
